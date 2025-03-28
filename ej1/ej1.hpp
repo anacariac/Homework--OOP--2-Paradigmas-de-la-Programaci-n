@@ -9,6 +9,7 @@ private:
     size_t seconds;
     string am_pm;
     void validation(size_t h, size_t m = 0 , size_t s =0, string am_pm = "a.m");
+    
 
 public:
     TIME();
@@ -24,5 +25,7 @@ public:
     size_t getMinute();
     size_t getSeconds();
     string getMeridian();
-
+    void printTime();
 };
+
+void testTime();
