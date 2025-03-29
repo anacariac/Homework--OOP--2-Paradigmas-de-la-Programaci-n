@@ -10,44 +10,59 @@ void Test(){
     double grade;
 
     do {
-        cout << "\nMenú:\n1. Inscribir estudiante\n2. Desinscribir estudiante\n3. Verificar si un estudiante está inscripto\n4. Imprimir lista de estudiantes ordenada\n5. Salir\nSeleccione una opción: ";
-        cin >> op;
+        cout << "\nMenú:\n1. Inscribir estudiante\n2. Desinscribir estudiante\n3. Verificar si un estudiante está inscripto\n4. Imprimir lista de estudiantes ordenada\n5. Añadir curso y nota a un estudiante\n6. Salir\nSeleccione una opción: ";
+        cin>> op;
 
         try {
             switch (op) {
                 case 1:
                     if (course.IsComplete()) {
-                        cout << "El curso está lleno.\n";
+                        cout << "El curso está lleno."<<endl;
                         break;
                     }
-                    cout << "Ingrese el nombre del estudiante: ";
+                    cout << "Ingrese el nombre del estudiante: "<<endl;
                     cin.ignore();
                     getline(cin, name);
-                    cout << "Ingrese el legajo: ";
+                    cout << "Ingrese el legajo: "<<endl;
                     cin >> file;
-                    cout << "Ingrese el nombre del curso: ";
-                    cin.ignore();
+                    cout << "Ingrese el nombre del curso: "<<endl;
                     getline(cin, courseName);
-                    cout << "Ingrese la nota final del curso: ";
+                    cout << "Ingrese la nota final del curso: "<<endl;
                     cin >> grade;
-                    course.RegisterStudent(make_shared<Student>(name, file), courseName,grade);
-                    cout << "Estudiante inscripto correctamente.\n";
+                    course.RegisterStudent(make_shared<Student>(name, file));
+                    cout << "Estudiante inscripto correctamente."<<endl;
                     break;
                 case 2:
-                    cout << "Ingrese el legajo del estudiante a desinscribir: ";
+                    cout << "Ingrese el legajo del estudiante a desinscribir: "<<endl;
                     cin >> file;
                     course.NoRegisterStudent(file);
-                    cout << "Estudiante eliminado correctamente.\n";
+                    cout << "Estudiante eliminado correctamente."<<endl;
                     break;
                 case 3:
-                    cout << "Ingrese el legajo: ";
+                    cout << "Ingrese el legajo: "<<endl;
                     cin >> file;
-                    cout << (course.IsRegistered(file) ? "El estudiante está inscripto.\n" : "No está inscripto.\n");
+                    cout << (course.IsRegistered(file) ? "El estudiante está inscripto.\n" : "No está inscripto.\n")<<endl;
                     break;
                 case 4:
                     course.PrintSorted();
                     break;
                 case 5:
+                cout << "Ingrese el legajo del estudiante: "<<endl;
+                cin >> file;
+                if (!course.IsRegistered(file)) {
+                    cout << "El estudiante no está inscripto."<<endl;
+                    break;
+                }
+                cout << "Ingrese el nombre del nuevo curso: "<<endl;
+                cin.ignore();
+                getline(cin, courseName);
+                cout << "Ingrese la nota final del curso: "<<endl;
+                cin >> grade;
+
+                course.addCoursetoStudent(file, courseName, grade);
+                cout << "Curso añadido correctamente."<<endl;
+                break;
+                case 6:
                     cout << "Saliendo del programa...\n";
                     break;
                 default:
@@ -57,12 +72,12 @@ void Test(){
             cout << "Error: " << e.what() << endl;
         }
 
-    } while (op != 5);
+    } while (op != 6);
 }
 
 Student ::Student(string n, int f): name(n),file(f) {}
 
-void Student::addCurse(string curse, double note){
+void Student::addCourse(string curse, double note){
     courses.push_back({curse,note});
 }
 
@@ -110,11 +125,10 @@ bool Course::IsRegistered(int file){
     return false;
 }
 
-void Course::RegisterStudent(shared_ptr<Student> student,string course, double note){
+void Course::RegisterStudent(shared_ptr<Student> student){
     if(IsComplete()) throw runtime_error("Capacidad máxima alcanzada.");
     if(IsRegistered(student->getFile())) throw runtime_error("Estudiante ya inscripto.");
-
-    student->addCurse(course,note);
+    
     Students.push_back(student);
 }
 
@@ -130,9 +144,20 @@ void Course::NoRegisterStudent(int file){
    
 }
 
+void Course::addCoursetoStudent(int file, string course, double note) {
+    if(!IsRegistered(file)) throw runtime_error("El estudiante no está registrado en el curso.");
+    for (const auto& student : Students) {
+        if (student->getFile() == file) {
+            student->addCourse(course, note);
+            return;
+        }
+    }
+}
+
+
 void Course::PrintSorted(){
     sort(Students.begin(),Students.end(),[](const shared_ptr<Student>& s1, const shared_ptr<Student>& s2){
-        return s1->getName() > s2->getName();
+        return s1->getName() < s2->getName();
     });
 
     for(const auto& student : Students){

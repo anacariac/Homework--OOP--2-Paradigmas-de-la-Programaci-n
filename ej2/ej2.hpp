@@ -13,7 +13,7 @@ private:
 public:
     Student(string n, int f);
 
-    void addCurse(string course, double note);
+    void addCourse(string course, double note);
     string getName();
     int getFile();
     double getScore();
@@ -31,10 +31,11 @@ public:
     Course();
 
     bool IsComplete();
-    void RegisterStudent(shared_ptr<Student> student, string course , double note);
+    void RegisterStudent(shared_ptr<Student> student);
     void NoRegisterStudent(int file);
     bool IsRegistered(int file);
     void PrintSorted();
+    void addCoursetoStudent(int file, string course, double note);
 
 };
 
