@@ -2,6 +2,64 @@
 #include <iostream>
 #include <algorithm>
 
+void Test(){
+    Course course;
+    int op;
+    size_t file;
+    string name, courseName;
+    double grade;
+
+    do {
+        cout << "\nMenú:\n1. Inscribir estudiante\n2. Desinscribir estudiante\n3. Verificar si un estudiante está inscripto\n4. Imprimir lista de estudiantes ordenada\n5. Salir\nSeleccione una opción: ";
+        cin >> op;
+
+        try {
+            switch (op) {
+                case 1:
+                    if (course.IsComplete()) {
+                        cout << "El curso está lleno.\n";
+                        break;
+                    }
+                    cout << "Ingrese el nombre del estudiante: ";
+                    cin.ignore();
+                    getline(cin, name);
+                    cout << "Ingrese el legajo: ";
+                    cin >> file;
+                    cout << "Ingrese el nombre del curso: ";
+                    cin.ignore();
+                    getline(cin, courseName);
+                    cout << "Ingrese la nota final del curso: ";
+                    cin >> grade;
+                    course.RegisterStudent(make_shared<Student>(name, file), courseName,grade);
+                    cout << "Estudiante inscripto correctamente.\n";
+                    break;
+                case 2:
+                    cout << "Ingrese el legajo del estudiante a desinscribir: ";
+                    cin >> file;
+                    course.NoRegisterStudent(file);
+                    cout << "Estudiante eliminado correctamente.\n";
+                    break;
+                case 3:
+                    cout << "Ingrese el legajo: ";
+                    cin >> file;
+                    cout << (course.IsRegistered(file) ? "El estudiante está inscripto.\n" : "No está inscripto.\n");
+                    break;
+                case 4:
+                    course.PrintSorted();
+                    break;
+                case 5:
+                    cout << "Saliendo del programa...\n";
+                    break;
+                default:
+                    cout << "Opción inválida.\n";
+            }
+        } catch (const exception& e) {
+            cout << "Error: " << e.what() << endl;
+        }
+
+    } while (op != 5);
+}
+
 Student ::Student(string n, int f): name(n),file(f) {}
 
 void Student::addCurse(string curse, double note){
@@ -80,4 +138,9 @@ void Course::PrintSorted(){
     for(const auto& student : Students){
         cout<< *student <<endl;
     }
+}
+
+int main(){
+    Test();
+    return 0;
 }

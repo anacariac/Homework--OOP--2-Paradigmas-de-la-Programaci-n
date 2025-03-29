@@ -37,3 +37,5 @@ public:
     void PrintSorted();
 
 };
+
+void Test();
