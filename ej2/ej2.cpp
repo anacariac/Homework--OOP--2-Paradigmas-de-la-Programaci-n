@@ -75,7 +75,9 @@ void Test(){
     } while (op != 6);
 }
 
-Student ::Student(string n, int f): name(n),file(f) {}
+Student::Student(string n, int f): name(n),file(f) {}
+
+Student::Student(string n, int f, vector<pair<string, double>> c) : name(n), file(f), courses(c) {}
 
 void Student::addCourse(string curse, double note){
     courses.push_back({curse,note});

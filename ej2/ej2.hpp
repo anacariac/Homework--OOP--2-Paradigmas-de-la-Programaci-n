@@ -12,6 +12,7 @@ private:
 
 public:
     Student(string n, int f);
+    Student(string n, int f, vector<pair<string, double>> c);
 
     void addCourse(string course, double note);
     string getName();
