@@ -17,14 +17,17 @@ public:
     TIME(size_t h, size_t m);
     TIME(size_t h, size_t m, size_t s);
     TIME(size_t h, size_t m, size_t s, string M);
+
     void setHour(size_t h);
     void setMinute(size_t m);
     void setSeconds(size_t s);
     void setMeridian(const string& M);
+
     size_t getHour();
     size_t getMinute();
     size_t getSeconds();
     string getMeridian();
+    
     void printTime();
 };
 
