@@ -92,12 +92,15 @@ vector<pair<string,double>> Student::getCourses() {return courses;}
 double Student::getScore(){
     if(courses.empty()) return 0.0;
 
+    size_t  finishedCourses;
     double sum = 0.0;
     for(const auto& course : courses){
+        if(course.second== -1) continue;
         sum += course.second;
+        finishedCourses += 1;
     }
 
-    return sum / courses.size();
+    return sum / finishedCourses;
 }
 
 bool Student::operator<(const Student& other){
@@ -132,6 +135,7 @@ void Course::RegisterStudent(shared_ptr<Student> student){
     if(IsRegistered(student->getFile())) throw runtime_error("Estudiante ya inscripto.");
     
     Students.push_back(student);
+    student->addCourse(courseName, -1);
 }
 
 void Course::NoRegisterStudent(int file){

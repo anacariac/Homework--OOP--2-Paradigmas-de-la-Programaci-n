@@ -25,6 +25,7 @@ public:
 
 class Course{
 private:
+    string courseName;
     vector<shared_ptr<Student>> Students;
     const size_t capacity = 20;
 
