@@ -9,7 +9,7 @@ void testTime(){
     int op;
 
     do{
-        cout<<"Opciones:\n1.Inicializar por default\n2.Inicializar ingresando solamente la hora\n3.Inicializar con hora y minuros\n4.Inicializar con hora, minutos y segundos\n5.Incializar todo\n6.Salir del programa\nSeleccione una opción"<<endl;
+        cout<<"\nOpciones:\n1.Inicializar por default\n2.Inicializar ingresando solamente la hora\n3.Inicializar con hora y minuros\n4.Inicializar con hora, minutos y segundos\n5.Incializar todo\n6.Salir del programa\nSeleccione una opción"<<endl;
         cin>> op;
         flag = true;
         
@@ -60,7 +60,7 @@ void testTime(){
             }
             if(1<=op && op<=5 && flag){
                 cout<<"Hora inicializada correctamente"<<endl;
-                cout<<"Horario en formato 12h: "<< setw(2) << setfill('0') << time.getHour() <<':'<< setw(2) << setfill('0') << time.getMinute() <<':'<< setw(2) << setfill('0') << time.getSeconds() <<time.getMeridian()<<endl;
+                cout<<"Horario en formato 12h: "<< setw(2) << setfill('0') << time.getHour() <<':'<< setw(2) << setfill('0') << time.getMinute() <<':'<< setw(2) << setfill('0') << time.getSeconds()<<' '<< time.getMeridian()<<endl;
                 cout<<"Horario en formato 24h: ";
                 time.printTime();
             }
@@ -72,14 +72,14 @@ void testTime(){
 
 }
 
-void TIME::validation(size_t h, size_t m = 0, size_t s =0, string am_pm = "a.m"){
-    if(h<1 || h>12) throw invalid_argument("Hora fuera de rango");
-    if(m > 60) throw invalid_argument("Minutos fuera de rango");
-    if(s > 60) throw invalid_argument("Segundos fuera de rango");
-    if(am_pm != "a.m" && am_pm != "p.m") throw invalid_argument("Formato invalido (debe usar 'a.m' o 'p.m')");
+void TIME::validation(size_t h, size_t m, size_t s, string am_pm){
+    if(h<1 || h>12) throw invalid_argument(": Hora fuera de rango.");
+    if(m > 60) throw invalid_argument(": Minutos fuera de rango.");
+    if(s > 60) throw invalid_argument(": Segundos fuera de rango.");
+    if(am_pm != "a.m" && am_pm != "p.m") throw invalid_argument(": Formato invalido (debe usar 'a.m' o 'p.m').");
 }
 
-TIME::TIME(): hour(0), minute(0), seconds(0), am_pm("a.m") {}
+TIME::TIME(): hour(0), minute(0), seconds(0), am_pm("a.m") {}// no serian las 12?
 
 TIME::TIME(size_t h){
     validation(h);
