@@ -23,6 +23,7 @@ public:
     shared_ptr<Number> Subtration(shared_ptr<Number> i) override;
     shared_ptr<Number> Multiplication(shared_ptr<Number> i) override;
     shared_ptr<Number> Division(shared_ptr<Number> i) override;
+    string toString() override;
 };
 
 class Real : public Number{
@@ -35,6 +36,7 @@ public:
     shared_ptr<Number> Subtration(shared_ptr<Number> r) override;
     shared_ptr<Number> Multiplication(shared_ptr<Number> r) override;
     shared_ptr<Number> Division(shared_ptr<Number> r) override;
+    string toString() override;
 };
 
 class Complex : public Number{
@@ -48,4 +50,5 @@ public:
     shared_ptr<Number> Subtration(shared_ptr<Number> c) override;
     shared_ptr<Number> Multiplication(shared_ptr<Number> c) override;
     shared_ptr<Number> Division(shared_ptr<Number> c) override;
+    string toString() override;
 };
