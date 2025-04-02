@@ -38,6 +38,7 @@ public:
     bool IsRegistered(int file);
     void PrintSorted();
     void addCoursetoStudent(int file, string course, double note);
+    size_t getCapacity();
 
 };
 

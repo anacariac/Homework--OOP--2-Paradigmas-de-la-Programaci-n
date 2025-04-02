@@ -4,10 +4,55 @@
 
 void Test(){
     Course course;
+    // Llenar el curso hasta el máximo permitido
+    for (size_t i = 1; i <= course.getCapacity(); ++i) {
+        string name = "Estudiante" + to_string(i);
+        if (i < 10) name = "Estudiante0" + to_string(i);  // Asegura nombres con formato uniforme
+
+        course.RegisterStudent(make_shared<Student>(name, i));
+    }
+
+    cout << "\nIntentando inscribir a otro estudiante cuando el curso está lleno:\n";
+    if (course.IsComplete()) {
+        cout << "\nEl curso está lleno. No se puede inscribir más estudiantes.\n";
+    } else {
+        course.RegisterStudent(make_shared<Student>("Extra", 999));
+    }
+
+    // Pruebas de funciones
+    cout << "\n--- Pruebas de funciones ---\n";
+
+    // 1. Verificar inscripción
+    size_t fileToCheck = 3;
+    cout << "\nVerificando inscripción de estudiante con legajo " << fileToCheck << ": "
+         << (course.IsRegistered(fileToCheck) ? "Inscripto.\n" : "No inscripto.\n");
+
+    // 2. Eliminar estudiante
+    size_t fileToRemove = 2;
+    cout << "\nEliminando estudiante con legajo " << fileToRemove << ".\n";
+    course.NoRegisterStudent(fileToRemove);
+
+    // 3. Imprimir lista ordenada
+    cout << "\nLista de estudiantes ordenada:\n";
+    course.PrintSorted();
+
+    // 4. Añadir curso y nota a un estudiante
+    size_t fileToAddCourse = 1;
+    string courseName = "Matemática";
+    double grade = 8.5;
+    cout << "Añadiendo curso '" << courseName << "' con nota " << grade
+         << " al estudiante con legajo " << fileToAddCourse << ".\n";
+    course.addCoursetoStudent(fileToAddCourse, courseName, grade);
+
+    // 5. Reimprimir lista para ver los cambios
+    cout << "\nLista de estudiantes después de añadir curso:\n";
+    course.PrintSorted();
+
+    cout << "\nFin de pruebas predeterminadas.\n";
+
     int op;
     size_t file;
-    string name, courseName;
-    double grade;
+    string name;
 
     do {
         cout << "\nMenú:\n1. Inscribir estudiante\n2. Desinscribir estudiante\n3. Verificar si un estudiante está inscripto\n4. Imprimir lista de estudiantes ordenada\n5. Añadir curso y nota a un estudiante\n6. Salir\nSeleccione una opción: ";
@@ -79,10 +124,6 @@ Student::Student(string n, int f): name(n),file(f) {}
 
 Student::Student(string n, int f, vector<pair<string, double>> c) : name(n), file(f), courses(c) {}
 
-void Student::addCourse(string curse, double note){
-    courses.push_back({curse,note});
-}
-
 string Student::getName() {return name;}
 
 int Student::getFile() {return file;}
@@ -92,15 +133,19 @@ vector<pair<string,double>> Student::getCourses() {return courses;}
 double Student::getScore(){
     if(courses.empty()) return 0.0;
 
-    size_t  finishedCourses;
+    size_t  finishedCourses =0;
     double sum = 0.0;
     for(const auto& course : courses){
-        if(course.second== -1) continue;
+        if(course.second == -1) continue;
         sum += course.second;
         finishedCourses += 1;
     }
 
-    return sum / finishedCourses;
+    return (finishedCourses > 0) ? sum / finishedCourses : 0.0; // Evita dividir por 0
+}
+
+void Student::addCourse(string curse, double note){
+    courses.push_back({curse,note});
 }
 
 bool Student::operator<(const Student& other){
@@ -111,6 +156,7 @@ ostream& operator<<(ostream& os, Student& student){
     os<< "Nombre: "<< student.getName()<< ", Legajo: "<< student.getFile();
     os<<", Cursos: ";
     for(const auto& course : student.getCourses()){
+        if(course.second == -1) continue;
         os<<"["<<course.first <<":"<<course.second<<"]";
     }
     os<<", Promedio General: "<< student.getScore();
@@ -160,6 +206,7 @@ void Course::addCoursetoStudent(int file, string course, double note) {
     }
 }
 
+size_t Course::getCapacity() {return capacity;}
 
 void Course::PrintSorted(){
     sort(Students.begin(),Students.end(),[](const shared_ptr<Student>& s1, const shared_ptr<Student>& s2){

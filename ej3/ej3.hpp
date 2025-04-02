@@ -39,9 +39,10 @@ public:
 
 class Complex : public Number{
 private:
-    double value;// averiguar como hacer con los complejos
+    double Real;
+    double Imag;
 public:
-    Complex(double v);
+    Complex(double r , double i);
 
     shared_ptr<Number> Addition(shared_ptr<Number> c) override;
     shared_ptr<Number> Subtration(shared_ptr<Number> c) override;
