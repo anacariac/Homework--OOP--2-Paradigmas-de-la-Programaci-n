@@ -37,5 +37,3 @@ public:
     */
     void printTime();
 };
-
-void testTime();

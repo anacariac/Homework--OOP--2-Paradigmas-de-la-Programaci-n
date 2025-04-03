@@ -1,6 +1,9 @@
-#include "ej3.hpp"
+#include "INTEGER.hpp"
+#include "REAL.hpp"
+#include "COMPLEX.hpp"
 #include <iostream>
 
+/*
 Integer::Integer(int v) : value(v) {}
 
 shared_ptr<Number> Integer::Addition(shared_ptr<Number> i) {
@@ -148,7 +151,7 @@ shared_ptr<Number> Complex::Division(shared_ptr<Number> r){
 string Complex::toString(){
     return "("+ to_string(Real) + " + " + to_string(Imag) + "i)";
 }
-
+*/
 int main(){
     // Prueba con Integer
     auto i1 = make_shared<Integer>(10);

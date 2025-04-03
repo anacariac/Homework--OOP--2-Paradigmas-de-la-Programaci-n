@@ -6,6 +6,9 @@ Course::Course(string name): courseName(name){}
 
 bool Course::IsComplete(){return Students.size() == 20;}
 
+size_t Course::getCapacity() {return capacity;}
+
+string Course::getCoursename(){return courseName;}
 bool Course::IsRegistered(int file){
     for(const auto& student: Students){
         if(student->getFile() == file){
@@ -44,10 +47,6 @@ void Course::addCoursetoStudent(int file, string course, double note) {
         }
     }
 }
-
-size_t Course::getCapacity() {return capacity;}
-
-string Course::getCoursename(){return courseName;}
 
 void Course::PrintSorted(){
     sort(Students.begin(),Students.end(),[](const shared_ptr<Student>& s1, const shared_ptr<Student>& s2){
