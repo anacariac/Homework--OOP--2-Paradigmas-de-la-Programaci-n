@@ -73,13 +73,13 @@ void testTime(){
 }
 
 void TIME::validation(size_t h, size_t m, size_t s, string am_pm){
-    if(h<1 || h>12) throw invalid_argument(": Hora fuera de rango.");
+    if(h<1 || h>12) throw invalid_argument(": Hora fuera de rango."); //La hora 00 son las 12 a.m/p.m
     if(m > 60) throw invalid_argument(": Minutos fuera de rango.");
     if(s > 60) throw invalid_argument(": Segundos fuera de rango.");
     if(am_pm != "a.m" && am_pm != "p.m") throw invalid_argument(": Formato invalido (debe usar 'a.m' o 'p.m').");
 }
 
-TIME::TIME(): hour(0), minute(0), seconds(0), am_pm("a.m") {}// no serian las 12?
+TIME::TIME(): hour(0), minute(0), seconds(0), am_pm("a.m") {}
 
 TIME::TIME(size_t h){
     validation(h);
@@ -128,7 +128,7 @@ void TIME::setSeconds(size_t s){
     seconds = s;
 }
 
-void TIME::setMeridian(const string& M){
+void TIME::setMeridian(string& M){
     validation(hour, minute, seconds, M);
     am_pm = M;
 }
