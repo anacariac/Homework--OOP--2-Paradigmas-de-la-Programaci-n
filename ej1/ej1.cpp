@@ -130,7 +130,7 @@ int main(){
                     break;
                 case 6:
                     cout<<"Saliendo del programa"<<endl;
-                    return;
+                    return 0;
                 default:
                     cout<<"Opción inválida. Volver a intentar"<<endl;
                     flag = false;
@@ -140,6 +140,52 @@ int main(){
                 cout<<"Horario en formato 12h: "<< setw(2) << setfill('0') << time.getHour() <<':'<< setw(2) << setfill('0') << time.getMinute() <<':'<< setw(2) << setfill('0') << time.getSeconds()<<' '<< time.getMeridian()<<endl;
                 cout<<"Horario en formato 24h: ";
                 time.printTime();
+                int sub_op;
+                do {
+                    cout << "\n\nOpciones adicionales:\n1. Cambiar hora\n2. Cambiar minutos\n3. Cambiar segundos\n4. Cambiar 'a.m/p.m'\n5. Mostrar formato 12h y 24h\n6. Volver al menú principal\nSeleccione una opción: ";
+                    cin >> sub_op;
+
+                    try {
+                        switch(sub_op){
+                            case 1:
+                                cout << "Nueva hora (1-12): ";
+                                cin >> h;
+                                time.setHour(h);
+                                break;
+                            case 2:
+                                cout << "Nuevos minutos (0-59): ";
+                                cin >> m;
+                                time.setMinute(m);
+                                break;
+                            case 3:
+                                cout << "Nuevos segundos (0-59): ";
+                                cin >> s;
+                                time.setSeconds(s);
+                                break;
+                            case 4:
+                                cout << "Nuevo valor (a.m/p.m): ";
+                                cin >> M;
+                                time.setMeridian(M);
+                                break;
+                            case 5:
+                                cout << "\nFormato 12h: "
+                                     << setw(2) << setfill('0') << time.getHour() << "h, "
+                                     << setw(2) << setfill('0') << time.getMinute() << "m, "
+                                     << setw(2) << setfill('0') << time.getSeconds() << "s "
+                                     << time.getMeridian() << endl;
+                                cout << "Formato 24h: ";
+                                time.printTime();
+                                break;
+                            case 6:
+                                cout << "Volviendo al menú principal..." << endl;
+                                break;
+                            default:
+                                cout << "Opción inválida." << endl;
+                        }
+                    } catch (const invalid_argument& e) {
+                        cout << "Error: " << e.what() << ". Intente nuevamente." << endl;
+                    }
+                } while(sub_op != 6);
             }
         }catch(const invalid_argument& e){
             cout<<"Error"<<e.what()<<"Intente nuevamente"<<endl;
