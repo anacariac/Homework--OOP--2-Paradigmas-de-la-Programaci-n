@@ -23,7 +23,7 @@ double Student::getScore(){
         finishedCourses += 1;
     }
 
-    return (finishedCourses > 0) ? sum / finishedCourses : 0.0; // Evita dividir por 0
+    return (finishedCourses > 0) ? sum / finishedCourses : 0.0; // Evito dividir por 0
 }
 
 void Student::addCourse(string curse, double note){

@@ -169,8 +169,8 @@ int main(){
                                 break;
                             case 5:
                                 cout << "\nFormato 12h: "
-                                     << setw(2) << setfill('0') << time.getHour() << "h, "
-                                     << setw(2) << setfill('0') << time.getMinute() << "m, "
+                                     << setw(2) << setfill('0') << time.getHour() << "h:"
+                                     << setw(2) << setfill('0') << time.getMinute() << "m:"
                                      << setw(2) << setfill('0') << time.getSeconds() << "s "
                                      << time.getMeridian() << endl;
                                 cout << "Formato 24h: ";

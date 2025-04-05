@@ -5,6 +5,7 @@ class Complex : public Number{
         double real;
         double imag;
     public:
+        //Constructor
         Complex(double r , double i);
     
         shared_ptr<Number> Addition(shared_ptr<Number> c) override;
@@ -12,8 +13,12 @@ class Complex : public Number{
         shared_ptr<Number> Multiplication(shared_ptr<Number> c) override;
         shared_ptr<Number> Division(shared_ptr<Number> c) override;
         string toString() override;
+
+        //GETTERS
         double getReal() const;
         double getImag() const;
+
+        //Destructor
         ~Complex() override;
     };
     
