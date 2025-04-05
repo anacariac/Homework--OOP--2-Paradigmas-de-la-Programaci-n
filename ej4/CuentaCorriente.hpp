@@ -1,5 +1,4 @@
 #pragma once
-//#include "CuentaBancaria.hpp"
 #include "CajadeAhorro.hpp"
 
 class CuentaCorriente: public CuentaBancaria{
@@ -10,5 +9,6 @@ class CuentaCorriente: public CuentaBancaria{
         CuentaCorriente(string titutlar, double saldo, shared_ptr<CajadeAhorro> caja);
         void retirar(double cant) override;
         void mostrarInfo() override;
+        ~CuentaCorriente() override;
     };
     

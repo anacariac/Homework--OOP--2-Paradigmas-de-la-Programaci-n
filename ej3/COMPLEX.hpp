@@ -2,8 +2,8 @@
 
 class Complex : public Number{
     private:
-        double Real;
-        double Imag;
+        double real;
+        double imag;
     public:
         Complex(double r , double i);
     
@@ -12,5 +12,8 @@ class Complex : public Number{
         shared_ptr<Number> Multiplication(shared_ptr<Number> c) override;
         shared_ptr<Number> Division(shared_ptr<Number> c) override;
         string toString() override;
+        double getReal() const;
+        double getImag() const;
+        ~Complex() override;
     };
     

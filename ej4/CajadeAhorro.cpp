@@ -18,3 +18,4 @@ void CajadeAhorro::mostrarInfo(){
     cantRep++;
 }
 
+CajadeAhorro::~CajadeAhorro(){}

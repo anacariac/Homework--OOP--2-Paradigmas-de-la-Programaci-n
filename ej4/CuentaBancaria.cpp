@@ -5,3 +5,4 @@ CuentaBancaria::CuentaBancaria(string titular, double balance): Titular(titular)
 
 void CuentaBancaria::depositar(double cant){balance += cant;}
 
+CuentaBancaria::~CuentaBancaria() {}

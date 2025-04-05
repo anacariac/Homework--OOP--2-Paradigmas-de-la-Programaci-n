@@ -9,14 +9,15 @@ class Course{
     
     public:
         Course(string name);
-    
+        Course(const Course& other);
+
         bool IsComplete();
         void RegisterStudent(shared_ptr<Student> student);
         void NoRegisterStudent(int file);
-        bool IsRegistered(int file);
+        bool IsRegistered(int file) const;
         void PrintSorted();
         void addCoursetoStudent(int file, string course, double note);
         size_t getCapacity();
-        string getCoursename();
+        string getCoursename() const;
     
     };

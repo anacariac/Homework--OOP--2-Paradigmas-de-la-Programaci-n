@@ -8,5 +8,6 @@ class CajadeAhorro: public CuentaBancaria{
         CajadeAhorro(string titular, double saldo);
         void retirar(double cant) override;
         void mostrarInfo() override;
+        ~CajadeAhorro() override;
         friend class CuentaCorriente;
     };

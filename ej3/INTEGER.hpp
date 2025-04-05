@@ -11,4 +11,6 @@ class Integer : public Number{
         shared_ptr<Number> Multiplication(shared_ptr<Number> i) override;
         shared_ptr<Number> Division(shared_ptr<Number> i) override;
         string toString() override;
+        int getValue();
+        ~Integer() override;
     };

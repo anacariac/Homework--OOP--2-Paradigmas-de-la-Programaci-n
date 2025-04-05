@@ -11,4 +11,6 @@ class Real : public Number{
         shared_ptr<Number> Multiplication(shared_ptr<Number> r) override;
         shared_ptr<Number> Division(shared_ptr<Number> r) override;
         string toString() override;
+        double getValue() const;
+        ~Real() override;
     };

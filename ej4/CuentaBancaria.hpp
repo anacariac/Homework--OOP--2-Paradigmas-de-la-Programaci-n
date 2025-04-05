@@ -12,5 +12,7 @@ class CuentaBancaria{
         void depositar(double cant);
         virtual void retirar(double cant) = 0;
         virtual void mostrarInfo() = 0;
+        // Destructor virtual
+        virtual ~CuentaBancaria();
     };
 

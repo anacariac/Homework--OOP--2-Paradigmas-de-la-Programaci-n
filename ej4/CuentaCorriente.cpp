@@ -30,3 +30,5 @@ void CuentaCorriente::retirar(double cant){
 void CuentaCorriente::mostrarInfo(){
     cout<<"Nombre del titular de la cuenta: "<<Titular<<"\nTipo de caja: Cuenta Corriente\nBalance: "<<balance<<endl;
 }
+
+CuentaCorriente::~CuentaCorriente(){}

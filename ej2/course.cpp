@@ -4,12 +4,21 @@
 
 Course::Course(string name): courseName(name){}
 
+Course::Course(const Course& other){
+    this->courseName = other.courseName;
+    
+    for(const auto& student : other.Students){
+        this->Students.push_back(student);
+    }
+
+}
+
 bool Course::IsComplete(){return Students.size() == 20;}
 
 size_t Course::getCapacity() {return capacity;}
 
-string Course::getCoursename(){return courseName;}
-bool Course::IsRegistered(int file){
+string Course::getCoursename() const {return courseName;}
+bool Course::IsRegistered(int file) const {
     for(const auto& student: Students){
         if(student->getFile() == file){
             return true;
